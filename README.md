@@ -9,7 +9,7 @@ Estilo : Primeira Pessoa / Cinematico
 
 Época : Contemporâneo
 
-Local : Quarto
+Local : Quarto / Apartamento
 
 Resumo : O jogador é um aspirante a aluno Alpha Edtech, tendo que resolver puzzles e desafios para conseguir receber a tão almejada ligação da Alpha.
 
