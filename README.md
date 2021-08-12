@@ -14,6 +14,7 @@ Local : Quarto / Apartamento
 Resumo : O jogador é um aspirante a aluno Alpha Edtech, tendo que resolver puzzles e desafios para conseguir receber a tão almejada ligação da Alpha.
 
 Mecanicas : Movimento, Mira, Interacões, Inventários, Missões, Dialogos, Trancas...
+
  0) Movimento / Mira : Usando um alvo para facilitar animações e cenas cinematicas.
  1) Interações : Personagem pode interagir e receber reação sob as condições necessárias 
     a) Objetos Interativos -> Computador, Celular, Televisor, Portas, Gavetas, Itens, Armarios...
