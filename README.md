@@ -23,7 +23,7 @@ Mecanicas : Jogador, Movimento, Mira, Interacões, Inventários, Objetivos, Dial
  
     a) Objetos Interativos -> Computador, Celular, Televisor, Portas, Gavetas, Itens, Armarios...
       
-      - Computador / Celular / Televisor : UI e State Machine usando Animator.
+      - Computador / Celular / Televisor : UI e State Machine (Animator ou ScriptableObject).
       
       - Portas : Possui sistema de Tranca.
       
