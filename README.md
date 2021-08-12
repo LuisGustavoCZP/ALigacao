@@ -11,7 +11,7 @@ Estilo : Primeira Pessoa / Cinematico
 
 Local : Quarto
 
-Resumo : Jogo onde o jogador é um aspirante a aluno Alpha Edtech, tendo que resolver puzzles e desafios para conseguir receber a tão almejada ligação da Alpha.
+Resumo : O jogador é um aspirante a aluno Alpha Edtech, tendo que resolver puzzles e desafios para conseguir receber a tão almejada ligação da Alpha.
 
 Mecanicas : Movimento, Mira, Interacões, Inventários, Missões, Dialogos, Trancas...
  0) Movimento / Mira : Usando um alvo para facilitar animações e cenas cinematicas.
