@@ -11,7 +11,7 @@ Estilo : Primeira Pessoa / Cinematico
 
 Local : Quarto / Apartamento
 
-Resumo : O jogador é um aspirante a aluno Alpha Edtech, tendo que resolver puzzles e desafios para conseguir receber a tão almejada ligação da Alpha.
+Resumo : O jogador é um aspirante a aluno Alpha Edtech, tendo que completar Objetivos e Desafios para conseguir receber a tão almejada Ligação da Alpha.
 
 Mecanicas : Jogador, Movimento, Mira, Interacões, Inventários, Objetivos, Dialogos, Trancas, Desafios (puzzles/triggers)...
 
@@ -29,22 +29,23 @@ Mecanicas : Jogador, Movimento, Mira, Interacões, Inventários, Objetivos, Dial
       
       - Armarios / Gavetas : Possui sistema de Tranca e Inventario.
       
-      - Itens : Podem ser usados para completar Desafios e Objetivos.
+      - Itens : Podem ser usados para completar Desafios.
  
  
  3) Inventarios : Permite ao Personagem e Objetos guardarem Itens.
     
-    a) Personagem : Pode usar os Itens guardados para completar Desafios e Objetivos.
+    a) Personagem : Pode usar os Itens guardados para completar Desafios.
     
     b) Objetos : Guardam Itens que podem ser adquiridos pelo Jogador.
+    
  
- 
- 4) Trancas : Podem ser abertas usando Itens ou completando Desafios...
- 
- 5) Objetivos : Completar Desafios ou adquirir Itens completam Objetivos, que guiam o Jogador para completar o jogo através dos Dialogos...
+ 4) Desafios : Resolver Puzzles, entregar Itens ou inserir senhas são necessarias para completar o desafio...
  
  6) Dialogos : O Personagem pode dialogar com o Jogador, e também com outros personagens pelo celular e computador...
-
- 7) Desafios : Puzzle ou senha necessaria para ativar um evento...
-
+ 
+ 7) Trancas : Podem ser abertas usando completando Desafios...
+ 
+ 8) Objetivos : Para realizar um Objetivo é necessario completar Desafios, guiam o Jogador para o final do jogo através dos Dialogos...
+ 
+ 
 Historia : ...
