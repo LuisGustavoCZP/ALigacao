@@ -82,15 +82,37 @@ public class Personagem : MonoBehaviour
     {
         //Tempo medio entre frames
         var deltaT = Time.smoothDeltaTime;
-        var camPos = cabecaCamera.transform.position;
+        var camT = cabecaCamera.transform;
+        var camPos = camT.position;
+
         //Rotacionar a cabeça na direcao e velocidade desejadas
-        if(olharMira) cabeca.rotation = Quaternion.Lerp(cabeca.rotation, Quaternion.LookRotation(olharMira.position - camPos), deltaT * olharSpeed);
+
         //Mover o agente na velocidade moverSpeed na direcao da mira, relativo a rotacao da cabeca
-        if(moverMira) navAgent.velocity = (moverMira.position - camPos).normalized * (moverSpeed);
+        if (moverMira) navAgent.velocity = (moverMira.position - camPos).normalized * (moverSpeed);
+    }
+    void LateUpdate()
+    {
+        var deltaT = Time.smoothDeltaTime;
+        var camT = cabecaCamera.transform;
+        var camPos = camT.position;
+
+        if (olharMira)
+        {
+            Vector3 olharDir = (olharMira.position - camPos).normalized,
+                olharHorizontal = transform.TransformDirection(olharDir),
+                olharVertical = transform.TransformDirection(olharDir);
+
+            olharHorizontal.y = 0;
+            //olharVertical.x = 0;
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.InverseTransformDirection(olharHorizontal)), deltaT * olharSpeed);
+
+            cabeca.rotation = Quaternion.Lerp(cabeca.rotation, Quaternion.LookRotation(transform.InverseTransformDirection(olharVertical)), deltaT * olharSpeed);
+        }
     }
 
 #if UNITY_EDITOR
-    private void Reset()
+        private void Reset()
     {
         //Quando resetar as config, ele adiciona os componentes e configurações basicas
         navAgent = GetComponent<NavMeshAgent>();
@@ -98,7 +120,7 @@ public class Personagem : MonoBehaviour
 
         m_cabecaCamera = GetComponentInChildren<Camera>();
         m_cabeca = m_cabecaCamera.transform.parent;
-
+        transform = base.transform;
         rigidbody.isKinematic = true;
         navAgent.updateRotation = false;
     }
