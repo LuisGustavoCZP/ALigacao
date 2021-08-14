@@ -23,7 +23,7 @@ public class Jogador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var moverDir = personagem.transform.position + new Vector3(Input.GetAxis("Horizontal"), 0 , Input.GetAxis("Vertical")).normalized;
+        var moverDir = moverTarget.position + new Vector3(Input.GetAxis("Horizontal"), 0 , Input.GetAxis("Vertical")).normalized;
         var olharDir = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0).normalized;
     }
 }
