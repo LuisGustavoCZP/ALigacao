@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Jogador : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Jogador : MonoBehaviour
     public float olharSensitive = 15;
     private Vector3 olharDirecao = Vector3.forward;
 
+    public Text interativoText = null;
+    public float interativoDistancia = 5;
     public LayerMask interativosMask = new LayerMask();
 
     void OnEnable()
@@ -31,26 +34,39 @@ public class Jogador : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) { gameObject.SetActive(false); return; }
+        if (Input.GetKeyDown(KeyCode.Escape)) { enabled = false; return; }
         var moverDir = personagem.transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
         moverTarget.position = personagem.transform.position + moverDir;
 
-        var camPos = personagem.cabecaCamera.transform.position;
+        var camT = personagem.cabecaCamera.transform;
+        var camPos = camT.position;
         var olharDir = personagem.cabeca.TransformDirection(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
         olharDirecao += olharDir * Time.deltaTime;
         olharDirecao.Normalize();
         olharTarget.position = camPos + olharDirecao;
 
-        if(Physics.Raycast(personagem.cabecaCamera.ScreenPointToRay(Vector3.zero), out RaycastHit hit, 3f, interativosMask, QueryTriggerInteraction.Collide))
+        if(Physics.Raycast(camPos, camT.forward, out RaycastHit hit, interativoDistancia, interativosMask))
         {
             if (hit.rigidbody)
             {
                 var eletro = hit.rigidbody.GetComponent<Eletronico>();
                 if (eletro)
                 {
-                    
+                    interativoText.text = $"{eletro.name}";
+                }
+            } 
+            else
+            {
+                var eletro = hit.collider.GetComponentInParent<Eletronico>();
+                if (eletro)
+                {
+                    interativoText.text = $"{eletro.name}";
                 }
             }
+        }
+        else
+        {
+            interativoText.text = string.Empty;
         }
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Classe base dos Eletronicos que tem tela, adicionar a um GameObject referente a um eletronico
+/// Classe base dos Eletronicos com tela, adicionar a um GameObject referente a um eletronico
 /// </summary>
 [RequireComponent(typeof(Rigidbody), typeof(Animator))]
 public class Eletronico : MonoBehaviour
