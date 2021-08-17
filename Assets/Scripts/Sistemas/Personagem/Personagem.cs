@@ -55,17 +55,20 @@ public class Personagem : MonoBehaviour
 
     #region Acoes
     /// <summary>
-    /// Mira para qual o jogador está olhando
+    /// Alvo para qual o jogador está olhando
     /// </summary>
-    public Transform olharMira = null;
+    public Transform olharAlvo = null;
     /// <summary>
-    /// Mira para qual o jogador está movendo
+    /// Alvo para qual o jogador está movendo
     /// </summary>
-    public Transform moverMira = null;
+    public Transform moverAlvo = null;
     /// <summary>
-    /// Mira para qual o jogador está movendo
+    /// Alvo que o jogador está interagindo
     /// </summary>
-    public bool interagir = false;
+    public Interativo interagirAlvo = null;
+    public Acao interagirAcao = null;
+    //public bool interagindo = false;
+
     #endregion
 
     #region Componentes basicos
@@ -80,25 +83,36 @@ public class Personagem : MonoBehaviour
     // Update chamado todo frame
     void Update()
     {
-        //Tempo medio entre frames
-        var deltaT = Time.smoothDeltaTime;
         var camT = cabecaCamera.transform;
         var camPos = camT.position;
 
-        //Rotacionar a cabeça na direcao e velocidade desejadas
-
+       
         //Mover o agente na velocidade moverSpeed na direcao da mira, relativo a rotacao da cabeca
-        if (moverMira) navAgent.velocity = (moverMira.position - camPos).normalized * (moverSpeed);
+        if (moverAlvo) navAgent.velocity = (moverAlvo.position - camPos).normalized * (moverSpeed);
+
+        if(!interagirAcao && interagirAlvo)
+        {
+            StartCoroutine(InteracaoCoroutine());
+        }
     }
+
+    IEnumerator InteracaoCoroutine()
+    {
+        var interativo = interagirAlvo;
+        yield return interagirAcao.Agir(this, interativo);
+        interagirAcao = null;
+    }
+
     void LateUpdate()
     {
+        //Rotacionar a cabeça na direcao e velocidade desejadas
         var deltaT = Time.smoothDeltaTime;
         var camT = cabecaCamera.transform;
         var camPos = camT.position;
 
-        if (olharMira)
+        if (olharAlvo)
         {
-            Vector3 olharDir = (olharMira.position - camPos).normalized,
+            Vector3 olharDir = (olharAlvo.position - camPos).normalized,
                 olharHorizontal = transform.TransformDirection(olharDir),
                 olharVertical = transform.TransformDirection(olharDir);
 

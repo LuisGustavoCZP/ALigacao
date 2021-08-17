@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Acao : MonoBehaviour
+//[CreateAssetMenu]
+public abstract class Acao : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string animation = string.Empty;
+    public abstract IEnumerator Agir(Personagem personagem, Interativo interativo);
+    /*{
+        while (interativo == personagem.interagirAlvo)
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+            yield return null;
+        }
+    }*/
 }

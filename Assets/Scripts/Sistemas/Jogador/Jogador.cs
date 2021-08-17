@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Jogador : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class Jogador : MonoBehaviour
     public float olharSensitive = 15;
     private Vector3 olharDirecao = Vector3.forward;
 
-    public Text interativoText = null;
+    public UIInterativo uiInterativo = null;
     public float interativoDistancia = 5;
     public LayerMask interativosMask = new LayerMask();
 
@@ -20,16 +19,16 @@ public class Jogador : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        personagem.moverMira = moverTarget;
-        personagem.olharMira = olharTarget;
+        personagem.moverAlvo = moverTarget;
+        personagem.olharAlvo = olharTarget;
     }
 
     void OnDisable()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        personagem.moverMira = null;
-        personagem.olharMira = null;
+        personagem.moverAlvo = null;
+        personagem.olharAlvo = null;
     }
 
     private void Update()
@@ -49,25 +48,22 @@ public class Jogador : MonoBehaviour
         {
             if (hit.rigidbody)
             {
-                var eletro = hit.rigidbody.GetComponent<Eletronico>();
-                if (eletro)
-                {
-                    interativoText.text = $"{eletro.name}";
-                }
+                ChecarAlvo(hit.rigidbody.GetComponent<Interativo>());
             } 
             else
             {
-                var eletro = hit.collider.GetComponentInParent<Eletronico>();
-                if (eletro)
-                {
-                    interativoText.text = $"{eletro.name}";
-                }
+                ChecarAlvo(hit.collider.GetComponentInParent<Interativo>());
             }
         }
         else
         {
-            interativoText.text = string.Empty;
+            ChecarAlvo(null);
         }
+    }
+
+    void ChecarAlvo (Interativo interativo)
+    {
+        uiInterativo.Change(interativo);
     }
 
 }
