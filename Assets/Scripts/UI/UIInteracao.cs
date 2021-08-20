@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIInterativo : MonoBehaviour
+public class UIInteracao : MonoBehaviour
 {
     public Jogador jogador = null;
     public Interativo interativo = null;
     public Text nomeText = null;
     public ScrollRect acaoView = null;
-    public List<UIInteracao> interacoes = new List<UIInteracao>();
 
     public void Change(Interativo _interativo)
     {

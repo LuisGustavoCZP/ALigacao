@@ -5,13 +5,31 @@ using UnityEngine;
 [System.Serializable]
 public struct AcaoTransicao
 {
-    public Condicao condicao;
+    public Condicao[] condicoes;
     public Acao acao;
 
-    public AcaoTransicao(Acao _acao, Condicao _condicao)
+    public bool Condicao (Personagem personagem, Interativo interativo)
+    {
+        foreach (var condicao in condicoes)
+        {
+            if (!condicao.SatisfazCondicao(personagem, interativo)) return false;
+        }
+        return true;
+    }
+
+    public void Executar (Personagem personagem, Interativo interativo)
+    {
+        foreach (var condicao in condicoes)
+        {
+            condicao.ExecutarCondicao(personagem, interativo);
+            personagem.interagirAcao = acao;
+        }
+    }
+
+    public AcaoTransicao(Acao _acao, params Condicao[] _condicoes)
     {
         acao = _acao;
-        condicao = _condicao;
+        condicoes = _condicoes;
     }
 }
 

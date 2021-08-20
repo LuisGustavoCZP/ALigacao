@@ -66,8 +66,14 @@ public class Personagem : MonoBehaviour
     /// Alvo que o jogador está interagindo
     /// </summary>
     public Interativo interagirAlvo = null;
+    /// <summary>
+    /// Ação que o personagem tem sobre o alvo
+    /// </summary>
     public Acao interagirAcao = null;
-    //public bool interagindo = false;
+    /// <summary>
+    /// O pesonagem ja esta numa interacao
+    /// </summary>
+    public bool interagindo = false;
 
     #endregion
 
@@ -86,23 +92,31 @@ public class Personagem : MonoBehaviour
         var camT = cabecaCamera.transform;
         var camPos = camT.position;
 
-       
         //Mover o agente na velocidade moverSpeed na direcao da mira, relativo a rotacao da cabeca
         if (moverAlvo) navAgent.velocity = (moverAlvo.position - camPos).normalized * (moverSpeed);
 
-        if(!interagirAcao && interagirAlvo)
+        if(!interagindo && interagirAlvo)
         {
             StartCoroutine(InteracaoCoroutine());
         }
     }
 
+    /// <summary>
+    /// A rotina de acao que é descrita dentro da propria acao,
+    /// acontece em paralelo com as animacoes e por isso é assincrona
+    /// </summary>
+    /// <returns></returns>
     IEnumerator InteracaoCoroutine()
     {
+        interagindo = true;
         var interativo = interagirAlvo;
         yield return interagirAcao.Agir(this, interativo);
-        interagirAcao = null;
+        if(interativo == interagirAcao) interagirAcao = null;
+        interagindo = false;
     }
 
+    // Update que vem depois do Update, antes da camera renderizar o proximo frame,
+    // evita sensação da travamento
     void LateUpdate()
     {
         //Rotacionar a cabeça na direcao e velocidade desejadas
@@ -125,10 +139,12 @@ public class Personagem : MonoBehaviour
         }
     }
 
+    //Se está rodando no editor, instrucao para o compilador
 #if UNITY_EDITOR
-        private void Reset()
+    //Quando resetar as config, ele adiciona os componentes e configurações basicas
+    private void Reset()
     {
-        //Quando resetar as config, ele adiciona os componentes e configurações basicas
+        
         navAgent = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
 
